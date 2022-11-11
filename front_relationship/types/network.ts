@@ -1,6 +1,7 @@
 type Network = {
   id: number;
-  name: string;
+  firstname: string;
+  lastname: string;
   gender: string;
   education: string;
   birthday: string;

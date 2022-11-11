@@ -1,4 +1,4 @@
-package celiae.relationship;
+package celiae.relationship.network;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class NetworkController {
     @Autowired
     private NetworkRepository repository;
 
+    @GetMapping("/network/length")
+    int length() {
+        return repository.findAll().size();
+    }
+
     @GetMapping("/network")
     List<Network> all() {
         return repository.findAll();
-    }
-
-    @GetMapping("/network/family")
-    List<Network> allFamily() {
-        return repository.findFamily();
     }
 
     @PostMapping("/network")
@@ -44,7 +44,8 @@ public class NetworkController {
 
         return repository.findById(id)
                 .map(network -> {
-                    network.setName(newNetwork.getName());
+                    network.setFirstname(newNetwork.getFirstname());
+                    network.setLastname(newNetwork.getLastname());
                     network.setGender(newNetwork.getGender());
                     network.setEducation(newNetwork.getEducation());
                     network.setBirthday(newNetwork.getBirthday());
@@ -53,9 +54,7 @@ public class NetworkController {
                     network.setQq(newNetwork.getQq());
                     network.setWechat(newNetwork.getWechat());
                     network.setAddress(newNetwork.getAddress());
-                    // network.setRelation_type(newNetwork.getRelation_type());
                     network.setRelation(newNetwork.getRelation());
-                    network.setIsFamily(newNetwork.getIsFamily());
                     return repository.save(network);
                 })
                 .orElseGet(() -> {

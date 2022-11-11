@@ -1,4 +1,4 @@
-package celiae.relationship;
+package celiae.relationship.network;
 
 import java.sql.Date;
 
@@ -15,7 +15,8 @@ public class Network {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String firstname;
+    private String lastname;
     private String gender;
     private String education;
     private Date birthday;
@@ -24,8 +25,5 @@ public class Network {
     private String qq;
     private String wechat;
     private String address;
-    // private String relation_type;
     private String relation;
-    private Boolean isFamily;
-
 }

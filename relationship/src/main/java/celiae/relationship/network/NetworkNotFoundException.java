@@ -1,4 +1,4 @@
-package celiae.relationship;
+package celiae.relationship.network;
 
 public class NetworkNotFoundException extends RuntimeException {
     NetworkNotFoundException(Long id) {

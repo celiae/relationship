@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { dispatchNetwork } from "app/utils";
 import { Anchor } from "@mantine/core";
 
-export default function User() {
+export default function FamilyMember() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 

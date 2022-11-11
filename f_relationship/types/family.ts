@@ -1,4 +1,4 @@
-type Network = {
+type Family = {
   id: number;
   name: string;
   gender: string;
@@ -11,4 +11,4 @@ type Network = {
   address: string;
   relation: string;
 };
-export default Network;
+export default Family;

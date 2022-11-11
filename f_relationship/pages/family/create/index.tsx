@@ -1,11 +1,11 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Network from "types/network";
+import Family from "types/family";
 import NetworkForm from "components/network-form";
 import { INITIAL_NETWORK } from "app/constant";
 
-export default function NetworkCreate() {
+export default function FamilyMemberCreate() {
   return (
     <>
       <Head>

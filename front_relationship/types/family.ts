@@ -1,6 +1,7 @@
-type Network = {
+type Family = {
   id: number;
-  name: string;
+  firstname: string;
+  lastname: string;
   gender: string;
   education: string;
   birthday: string;
@@ -11,4 +12,4 @@ type Network = {
   address: string;
   relation: string;
 };
-export default Network;
+export default Family;
