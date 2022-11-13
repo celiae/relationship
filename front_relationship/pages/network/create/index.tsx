@@ -1,9 +1,7 @@
-import NetworkForm from "components/network-form";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { INITIAL_NETWORK } from "app/constant";
 import { UpdatePost } from "app/utils";
-import { useRouter } from "next/router";
 import Network from "types/network";
 
 export default function NetworkCreate() {
@@ -154,7 +152,7 @@ export default function NetworkCreate() {
           <div className="bg-zinc-600 px-4 py-3 text-right sm:px-6">
             <button
               onClick={() => {
-                UpdatePost("PUT", data);
+                UpdatePost(`/api/network`, "POST", data);
               }}
               className="inline-flex justify-center rounded-md border border-transparent bg-sky-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >

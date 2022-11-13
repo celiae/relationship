@@ -19,26 +19,34 @@ const navActive =
 
 const navDeactive = "text-cyan-50 " + " " + nav;
 
-export default function Sidebar() {
+interface Props {
+  opened: boolean;
+}
+
+export default function Sidebar({ opened }: Props) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const sidebarActive = useAppSelector((state) => state.theme.SidebarActive);
   return (
-    <aside className="w-64">
-      <div className="px-3 py-4 overflow-y-auto rounded">
-        {links.map((link) => (
-          <div
-            key={link.href}
-            className={link.id === sidebarActive ? navActive : navDeactive}
-            onClick={() => {
-              router.push(link.href);
-              dispatch(setSidebarActive(link.id));
-            }}
-          >
-            <div className="font-bold transition">{link.msg}</div>
-          </div>
-        ))}
-      </div>
+    <aside
+      className={
+        opened
+          ? "z-10 w-64 h-full fixed overflow-y-auto px-3 py-4"
+          : "z-10 w-0 fixed overflow-y-auto"
+      }
+    >
+      {links.map((link) => (
+        <div
+          key={link.href}
+          className={link.id === sidebarActive ? navActive : navDeactive}
+          onClick={() => {
+            router.push(link.href);
+            dispatch(setSidebarActive(link.id));
+          }}
+        >
+          <div className="font-bold transition">{link.msg}</div>
+        </div>
+      ))}
     </aside>
   );
 }

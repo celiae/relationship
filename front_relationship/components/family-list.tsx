@@ -22,8 +22,11 @@ export default function FamilyList({ family }: Props) {
             <span className="mr-1">{fam.lastname}</span>
             <span>{fam.firstname}</span>
           </div>
-          <div className="flex-1">{fam.phone == "" ? "未知" : fam.phone}</div>
-          <div className="flex-flex-shrink md:flex-1 px-4">
+          <div className="flex-initial w-48 hidden sm:block">
+            {fam.phone == "" ? "未知" : fam.phone}
+          </div>
+          <div className="flex-initial w-48 hidden md:block">{fam.wechat}</div>
+          <div className="flex-auto hidden lg:block">
             {fam.relation == "" ? "未知" : fam.relation}
           </div>
           <div className="flex-initial flex justify-end">

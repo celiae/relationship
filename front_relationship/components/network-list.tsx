@@ -13,19 +13,21 @@ export default function NetworkList({ network }: Props) {
       {network.map((net) => (
         <div
           key={net.id}
-          className="flex px-3 hover:bg-zinc-700 h-10 items-center transition mb-1 rounded-lg"
+          className="flex flex-nowrap px-3 hover:bg-zinc-700 h-10 items-center transition mb-1 rounded-lg"
           onClick={() => {
             router.push(`/network/show/${net.id}`);
           }}
         >
-          <div className="flex-initial w-20">
+          <div className="flex-initial w-20 whitespace-nowrap overflow-hidden">
             <span className="mr-1">{net.lastname}</span>
             <span>{net.firstname}</span>
           </div>
-          <div className="flex-auto">
+          <div className="flex-initial w-48 hidden sm:block">
             {net.phone == "" ? "未知" : net.phone}
           </div>
-          <div className="flex-initial flex justify-end">
+          <div className="flex-initial w-48 hidden md:block">{net.wechat}</div>
+          <div className="flex-auto hidden lg:block">{net.relation}</div>
+          <div className="flex-initial flex flex-nowrap justify-end">
             <div>
               <button
                 className="rounded p-1 text-sky-500 hover:bg-gray-200"
