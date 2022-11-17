@@ -1,6 +1,5 @@
 import Family from "types/family";
-import { MdModeEditOutline } from "react-icons/md";
-import DeleteButton from "./delete-button";
+import { MdModeEditOutline, MdOutlineDeleteForever } from "react-icons/md";
 import { useRouter } from "next/router";
 
 interface Props {
@@ -13,7 +12,7 @@ export default function FamilyList({ family }: Props) {
       {family.map((fam) => (
         <div
           key={fam.id}
-          className="flex px-3 hover:bg-zinc-700 h-10 items-center transition mb-1 rounded-lg"
+          className="flex px-3 hover:bg-zinc-700 h-10 items-center transition mb-1 rounded-lg cursor-pointer"
           onClick={() => {
             router.push(`/family/show/${fam.id}`);
           }}
@@ -42,7 +41,18 @@ export default function FamilyList({ family }: Props) {
               </button>
             </div>
             <div className="ml-3">
-              <DeleteButton fetchPath={`/api/family/${fam.id}`} />
+              <button
+                className="text-gray-50 rounded p-1 hover:bg-sky-600"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fetch(`/api/family/${fam.id}`, {
+                    method: "DELETE",
+                  });
+                  router.push("/family");
+                }}
+              >
+                <MdOutlineDeleteForever />
+              </button>
             </div>
           </div>
         </div>

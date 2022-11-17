@@ -14,9 +14,9 @@ export default function Total({ msg, length, href }: Props) {
   return (
     <>
       <div className="p-2 w-64 m-3 rounded shadow-2xl">
-        <div className="text-2xl">{msg}</div>
+        <div className="text-xl">{msg}</div>
         <div className="flex">
-          <div className="text-4xl text-sky-400">{length}</div>
+          <div className="text-2xl text-sky-400">{length}</div>
           <div className="text-2xl p-4">
             <BsPeopleFill />
           </div>

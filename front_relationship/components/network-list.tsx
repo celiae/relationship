@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { MdModeEditOutline } from "react-icons/md";
+import { MdModeEditOutline, MdOutlineDeleteForever } from "react-icons/md";
 import Network from "types/network";
-import DeleteButton from "./delete-button";
 
 interface Props {
   network: Network[];
@@ -13,7 +12,7 @@ export default function NetworkList({ network }: Props) {
       {network.map((net) => (
         <div
           key={net.id}
-          className="flex flex-nowrap px-3 hover:bg-zinc-700 h-10 items-center transition mb-1 rounded-lg"
+          className="flex flex-nowrap px-3 hover:bg-zinc-700 h-10 items-center transition mb-1 rounded-lg cursor-pointer"
           onClick={() => {
             router.push(`/network/show/${net.id}`);
           }}
@@ -40,7 +39,18 @@ export default function NetworkList({ network }: Props) {
               </button>
             </div>
             <div className="ml-3">
-              <DeleteButton fetchPath={`/api/network/${net.id}`} />
+              <button
+                className="text-gray-50 rounded p-1 hover:bg-sky-600"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fetch(`/api/network/${net.id}`, {
+                    method: "DELETE",
+                  });
+                  router.push("/network");
+                }}
+              >
+                <MdOutlineDeleteForever />
+              </button>
             </div>
           </div>
         </div>

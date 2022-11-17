@@ -1,3 +1,4 @@
+import { SubmitHandler } from "react-hook-form";
 import useSWR from "swr";
 import Network from "types/network";
 import { INITIAL_NETWORK } from "./constant";

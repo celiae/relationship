@@ -3,11 +3,11 @@ import { setSidebarActive } from "features/theme";
 import { useRouter } from "next/router";
 
 const links = [
-  { id: 0, href: "/", msg: "Home" },
-  { id: 1, href: "/network", msg: "Network" },
-  { id: 2, href: "/family", msg: "Family" },
-  { id: 3, href: "/search", msg: "Search" },
-  { id: 4, href: "/create", msg: "Create" },
+  { id: 0, href: "/", msg: "主页" },
+  { id: 1, href: "/network", msg: "人际" },
+  { id: 2, href: "/family", msg: "亲属" },
+  { id: 3, href: "/search", msg: "搜索" },
+  { id: 4, href: "/create", msg: "新建" },
 ];
 
 const nav = "hover:bg-zinc-800 flex items-center transition cursor-pointer p-3";
