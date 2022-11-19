@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import Network from "types/network";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { EDUCATION } from "app/constant";
+import { EDUCATION } from "lib/constant";
 
 const inputStyle =
   "bg-zinc-800 mt-1 block w-full rounded-md border p-2 border-zinc-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm";
@@ -19,7 +19,6 @@ export default function NetworkForm({ network, method }: Props) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Network>();
 

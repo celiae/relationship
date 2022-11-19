@@ -1,6 +1,5 @@
 import FamilyList from "components/family-list";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Family from "types/family";
 
 interface Props {
@@ -8,8 +7,6 @@ interface Props {
 }
 
 export default function FamilyHome({ family }: Props) {
-  const router = useRouter();
-
   return (
     <>
       <Head>

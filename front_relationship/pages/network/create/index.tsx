@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import { INITIAL_NETWORK } from "app/constant";
+import { INITIAL_NETWORK } from "lib/constant";
 import NetworkForm from "components/network-form";
 
 export default function NetworkCreate() {

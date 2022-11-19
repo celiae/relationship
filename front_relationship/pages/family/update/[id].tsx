@@ -1,8 +1,6 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import Network from "types/network";
-import { INITIAL_NETWORK } from "app/constant";
 import FamilyForm from "components/family-form";
 import Family from "types/family";
 

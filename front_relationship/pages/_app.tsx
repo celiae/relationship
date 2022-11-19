@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/layout";
 import { Provider } from "react-redux";
-import store from "app/store";
+import store from "lib/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

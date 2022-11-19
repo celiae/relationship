@@ -1,8 +1,5 @@
 import Total from "components/total";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { BiDetail } from "react-icons/bi";
-import { BsPeopleFill } from "react-icons/bs";
 
 interface Props {
   network_length: number;
@@ -10,7 +7,6 @@ interface Props {
 }
 
 export default function Home({ network_length, family_length }: Props) {
-  const router = useRouter();
   return (
     <>
       <Head>

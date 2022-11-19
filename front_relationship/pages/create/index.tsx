@@ -1,7 +1,4 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-
-const links = [{}];
 
 export default function Create() {
   const router = useRouter();

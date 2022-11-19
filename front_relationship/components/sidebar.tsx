@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "lib/hooks";
 import { setSidebarActive } from "features/theme";
 import { useRouter } from "next/router";
 

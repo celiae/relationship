@@ -1,9 +1,7 @@
 import Head from "next/head";
-import { INITIAL_FAMILY } from "app/constant";
+import { INITIAL_FAMILY } from "lib/constant";
 import React, { useState } from "react";
 import Family from "types/family";
-import { UpdatePost } from "app/utils";
-import { EDUCATION } from "app/constant";
 import FamilyForm from "components/family-form";
 
 export default function FamilyMemberCreate() {
