@@ -95,36 +95,3 @@ export default function NetworkShow() {
     </div>
   );
 }
-
-// export async function getStaticPaths() {
-//   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-//     return {
-//       paths: [],
-//       fallback: "blocking",
-//     };
-//   }
-
-//   const res = await fetch("http://localhost:8080/network");
-//   const networks: Network[] = await res.json();
-
-//   const paths = networks.map((network) => ({
-//     params: { id: network.id.toString() },
-//   }));
-
-//   return { paths, fallback: false };
-// }
-
-// type Params = {
-//   params: {
-//     id: string;
-//   };
-// };
-
-// export async function getStaticProps({ params }: Params) {
-//   const res = await fetch(`http://localhost:8080/network/${params.id}`);
-//   const network: Network = await res.json();
-
-//   return {
-//     props: { network },
-//   };
-// }

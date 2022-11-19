@@ -95,36 +95,3 @@ export default function FamilyShow() {
     </div>
   );
 }
-
-export async function getStaticPaths() {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: "blocking",
-    };
-  }
-
-  const res = await fetch("http://localhost:8080/family");
-  const networks: Family[] = await res.json();
-
-  const paths = networks.map((family) => ({
-    params: { id: family.id.toString() },
-  }));
-
-  return { paths, fallback: false };
-}
-
-type Params = {
-  params: {
-    id: string;
-  };
-};
-
-export async function getStaticProps({ params }: Params) {
-  const res = await fetch(`http://localhost:8080/family/${params.id}`);
-  const family: Family = await res.json();
-
-  return {
-    props: { family },
-  };
-}

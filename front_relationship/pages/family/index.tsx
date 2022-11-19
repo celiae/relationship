@@ -24,14 +24,3 @@ export default function FamilyHome() {
     </>
   );
 }
-// export async function getStaticProps() {
-//   const res = await fetch("http://localhost:8080/family");
-
-//   const family = await res.json();
-
-//   return {
-//     props: {
-//       family,
-//     },
-//   };
-// }

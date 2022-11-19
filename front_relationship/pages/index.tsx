@@ -1,4 +1,5 @@
 import Total from "components/total";
+import { useFamilyLength, useNetworkLength } from "lib/utils";
 import Head from "next/head";
 
 interface Props {
@@ -6,7 +7,10 @@ interface Props {
   family_length: number;
 }
 
-export default function Home({ network_length, family_length }: Props) {
+export default function Home() {
+  const { network_length } = useNetworkLength();
+  const { family_length } = useFamilyLength();
+  if (!network_length || !family_length) return <div>Loading...</div>;
   return (
     <>
       <Head>
@@ -24,20 +28,4 @@ export default function Home({ network_length, family_length }: Props) {
       </div>
     </>
   );
-}
-export async function getStaticProps() {
-  let res = await fetch("http://localhost:8080/network/length");
-
-  const network_length = await res.json();
-
-  res = await fetch("http://localhost:8080/family/length");
-
-  const family_length = await res.json();
-
-  return {
-    props: {
-      network_length,
-      family_length,
-    },
-  };
 }

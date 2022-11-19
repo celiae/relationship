@@ -24,14 +24,3 @@ export default function NetworkHome() {
     </>
   );
 }
-// export async function getStaticProps() {
-//   const res = await fetch("http://localhost:8080/network");
-
-//   const network = await res.json();
-
-//   return {
-//     props: {
-//       network,
-//     },
-//   };
-// }

@@ -13,7 +13,9 @@ interface Props {
 export default function NetworkList() {
   const router = useRouter();
   const id = router.query.id as string;
+
   const { data, error } = useSWR(`/api/network/${id}`, fetcher);
+
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
   return (
@@ -25,36 +27,3 @@ export default function NetworkList() {
     </>
   );
 }
-
-// export async function getStaticPaths() {
-//   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-//     return {
-//       paths: [],
-//       fallback: "blocking",
-//     };
-//   }
-
-//   const res = await fetch("http://localhost:8080/network");
-//   const networks: Network[] = await res.json();
-
-//   const paths = networks.map((network) => ({
-//     params: { id: network.id.toString() },
-//   }));
-
-//   return { paths, fallback: false };
-// }
-
-// type Params = {
-//   params: {
-//     id: string;
-//   };
-// };
-
-// export async function getStaticProps({ params }: Params) {
-//   const res = await fetch(`http://localhost:8080/network/${params.id}`);
-//   const network: Network = await res.json();
-
-//   return {
-//     props: { network },
-//   };
-// }

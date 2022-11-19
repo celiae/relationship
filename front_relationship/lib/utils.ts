@@ -27,15 +27,18 @@ export function UpdatePost(api: string, method: string, data: Network) {
 
 export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export function useNetwork(id: string) {
-  const { data, error } = useSWR<Network>(
-    id ? `/api/network/${id}` : null,
-    fetcher
-  );
+export function useNetworkLength() {
+  const { data, error } = useSWR(`/api/network/length`, fetcher);
 
   return {
-    network: data,
-    isLoading: !error && !data,
-    isError: error,
+    network_length: data,
+  };
+}
+
+export function useFamilyLength() {
+  const { data, error } = useSWR(`/api/family/length`, fetcher);
+
+  return {
+    family_length: data,
   };
 }
