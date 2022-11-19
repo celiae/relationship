@@ -25,7 +25,7 @@ export function UpdatePost(api: string, method: string, data: Network) {
   }
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function useNetwork(id: string) {
   const { data, error } = useSWR<Network>(

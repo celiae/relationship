@@ -7,25 +7,33 @@ import { RiWechatFill } from "react-icons/ri";
 import { IoLocation } from "react-icons/io5";
 import Network from "types/network";
 import { BiNetworkChart } from "react-icons/bi";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import { fetcher } from "lib/utils";
 
 interface Props {
   network: Network;
 }
 
-export default function NetworkShow({ network }: Props) {
+export default function NetworkShow() {
+  const router = useRouter();
+  const id = router.query.id as string;
+  const { data, error } = useSWR(`/api/network/${id}`, fetcher);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
   return (
     <div className="p-4 select-none">
       <div className="flex items-center">
-        <div className="p-2 text-3xl">{network.lastname}</div>
-        <div className="p-2 text-3xl">{network.firstname}</div>
-        <Gender gender={network.gender} />
+        <div className="p-2 text-3xl">{data.lastname}</div>
+        <div className="p-2 text-3xl">{data.firstname}</div>
+        <Gender gender={data.gender} />
       </div>
       <div className="flex items-center m-2">
         <div className="pr-2">
           <FaBirthdayCake />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.birthday}
+          {data.birthday}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -33,7 +41,7 @@ export default function NetworkShow({ network }: Props) {
           <FaBook />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.education}
+          {data.education}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -41,7 +49,7 @@ export default function NetworkShow({ network }: Props) {
           <AiFillMail />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.email}
+          {data.email}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -49,7 +57,7 @@ export default function NetworkShow({ network }: Props) {
           <FaPhoneAlt />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.phone}
+          {data.phone}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -57,7 +65,7 @@ export default function NetworkShow({ network }: Props) {
           <SiTencentqq />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.qq}
+          {data.qq}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -65,7 +73,7 @@ export default function NetworkShow({ network }: Props) {
           <RiWechatFill />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.wechat}
+          {data.wechat}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -73,7 +81,7 @@ export default function NetworkShow({ network }: Props) {
           <IoLocation />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.address ? network.address : "未知"}
+          {data.address ? data.address : "未知"}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -81,42 +89,42 @@ export default function NetworkShow({ network }: Props) {
           <BiNetworkChart />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {network.relation}
+          {data.relation}
         </div>
       </div>
     </div>
   );
 }
 
-export async function getStaticPaths() {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: "blocking",
-    };
-  }
+// export async function getStaticPaths() {
+//   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+//     return {
+//       paths: [],
+//       fallback: "blocking",
+//     };
+//   }
 
-  const res = await fetch("http://localhost:8080/network");
-  const networks: Network[] = await res.json();
+//   const res = await fetch("http://localhost:8080/network");
+//   const networks: Network[] = await res.json();
 
-  const paths = networks.map((network) => ({
-    params: { id: network.id.toString() },
-  }));
+//   const paths = networks.map((network) => ({
+//     params: { id: network.id.toString() },
+//   }));
 
-  return { paths, fallback: false };
-}
+//   return { paths, fallback: false };
+// }
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
+// type Params = {
+//   params: {
+//     id: string;
+//   };
+// };
 
-export async function getStaticProps({ params }: Params) {
-  const res = await fetch(`http://localhost:8080/network/${params.id}`);
-  const network: Network = await res.json();
+// export async function getStaticProps({ params }: Params) {
+//   const res = await fetch(`http://localhost:8080/network/${params.id}`);
+//   const network: Network = await res.json();
 
-  return {
-    props: { network },
-  };
-}
+//   return {
+//     props: { network },
+//   };
+// }

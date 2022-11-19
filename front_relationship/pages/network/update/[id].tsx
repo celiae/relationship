@@ -2,51 +2,59 @@ import Head from "next/head";
 import React from "react";
 import Network from "types/network";
 import NetworkForm from "components/network-form";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import { fetcher } from "lib/utils";
 
 interface Props {
   network: Network;
 }
 
-export default function NetworkList({ network }: Props) {
+export default function NetworkList() {
+  const router = useRouter();
+  const id = router.query.id as string;
+  const { data, error } = useSWR(`/api/network/${id}`, fetcher);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
   return (
     <>
       <Head>
         <title>Network | Relationship</title>
       </Head>
-      <NetworkForm network={network} method="PUT" />
+      <NetworkForm network={data} method="PUT" />
     </>
   );
 }
 
-export async function getStaticPaths() {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: "blocking",
-    };
-  }
+// export async function getStaticPaths() {
+//   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+//     return {
+//       paths: [],
+//       fallback: "blocking",
+//     };
+//   }
 
-  const res = await fetch("http://localhost:8080/network");
-  const networks: Network[] = await res.json();
+//   const res = await fetch("http://localhost:8080/network");
+//   const networks: Network[] = await res.json();
 
-  const paths = networks.map((network) => ({
-    params: { id: network.id.toString() },
-  }));
+//   const paths = networks.map((network) => ({
+//     params: { id: network.id.toString() },
+//   }));
 
-  return { paths, fallback: false };
-}
+//   return { paths, fallback: false };
+// }
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
+// type Params = {
+//   params: {
+//     id: string;
+//   };
+// };
 
-export async function getStaticProps({ params }: Params) {
-  const res = await fetch(`http://localhost:8080/network/${params.id}`);
-  const network: Network = await res.json();
+// export async function getStaticProps({ params }: Params) {
+//   const res = await fetch(`http://localhost:8080/network/${params.id}`);
+//   const network: Network = await res.json();
 
-  return {
-    props: { network },
-  };
-}
+//   return {
+//     props: { network },
+//   };
+// }

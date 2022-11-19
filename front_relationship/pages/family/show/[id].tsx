@@ -7,25 +7,33 @@ import { RiWechatFill } from "react-icons/ri";
 import { IoLocation } from "react-icons/io5";
 import Family from "types/family";
 import { BiNetworkChart } from "react-icons/bi";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import { fetcher } from "lib/utils";
 
 interface Props {
   family: Family;
 }
 
-export default function FamilyShow({ family }: Props) {
+export default function FamilyShow() {
+  const router = useRouter();
+  const id = router.query.id as string;
+  const { data, error } = useSWR(`/api/family/${id}`, fetcher);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
   return (
     <div className="p-4 select-none">
       <div className="flex items-center">
-        <div className="p-2 text-3xl">{family.lastname}</div>
-        <div className="p-2 text-3xl">{family.firstname}</div>
-        <Gender gender={family.gender} />
+        <div className="p-2 text-3xl">{data.lastname}</div>
+        <div className="p-2 text-3xl">{data.firstname}</div>
+        <Gender gender={data.gender} />
       </div>
       <div className="flex items-center m-2">
         <div className="pr-2">
           <FaBirthdayCake />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.birthday}
+          {data.birthday}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -33,7 +41,7 @@ export default function FamilyShow({ family }: Props) {
           <FaBook />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.education}
+          {data.education}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -41,7 +49,7 @@ export default function FamilyShow({ family }: Props) {
           <AiFillMail />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.email}
+          {data.email}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -49,7 +57,7 @@ export default function FamilyShow({ family }: Props) {
           <FaPhoneAlt />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.phone}
+          {data.phone}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -57,7 +65,7 @@ export default function FamilyShow({ family }: Props) {
           <SiTencentqq />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.qq}
+          {data.qq}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -65,7 +73,7 @@ export default function FamilyShow({ family }: Props) {
           <RiWechatFill />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.wechat}
+          {data.wechat}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -73,7 +81,7 @@ export default function FamilyShow({ family }: Props) {
           <IoLocation />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.address ? family.address : "未知"}
+          {data.address ? data.address : "未知"}
         </div>
       </div>
       <div className="flex items-center m-2">
@@ -81,7 +89,7 @@ export default function FamilyShow({ family }: Props) {
           <BiNetworkChart />
         </div>
         <div className="hover:bg-sky-400 rounded-md px-2 cursor-pointer transition-all">
-          {family.relation}
+          {data.relation}
         </div>
       </div>
     </div>

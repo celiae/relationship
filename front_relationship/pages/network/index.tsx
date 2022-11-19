@@ -1,13 +1,17 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Network from "types/network";
 import NetworkList from "components/network-list";
+import useSWR from "swr";
+import { fetcher } from "lib/utils";
 
 interface Props {
   network: Network[];
 }
-export default function NetworkHome({ network }: Props) {
-  const router = useRouter();
+
+export default function NetworkHome() {
+  const { data, error } = useSWR("/api/network", fetcher);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
   return (
     <>
       <Head>
@@ -16,18 +20,18 @@ export default function NetworkHome({ network }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="text-4xl p-4">人际</div>
-      <NetworkList network={network} />
+      <NetworkList network={data} />
     </>
   );
 }
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:8080/network");
+// export async function getStaticProps() {
+//   const res = await fetch("http://localhost:8080/network");
 
-  const network = await res.json();
+//   const network = await res.json();
 
-  return {
-    props: {
-      network,
-    },
-  };
-}
+//   return {
+//     props: {
+//       network,
+//     },
+//   };
+// }

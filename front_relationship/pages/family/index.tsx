@@ -1,12 +1,17 @@
 import FamilyList from "components/family-list";
 import Head from "next/head";
 import Family from "types/family";
+import useSWR from "swr";
+import { fetcher } from "lib/utils";
 
 interface Props {
   family: Family[];
 }
 
-export default function FamilyHome({ family }: Props) {
+export default function FamilyHome() {
+  const { data, error } = useSWR("/api/family", fetcher);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
   return (
     <>
       <Head>
@@ -15,18 +20,18 @@ export default function FamilyHome({ family }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="text-4xl p-4">亲属</div>
-      <FamilyList family={family} />
+      <FamilyList family={data} />
     </>
   );
 }
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:8080/family");
+// export async function getStaticProps() {
+//   const res = await fetch("http://localhost:8080/family");
 
-  const family = await res.json();
+//   const family = await res.json();
 
-  return {
-    props: {
-      family,
-    },
-  };
-}
+//   return {
+//     props: {
+//       family,
+//     },
+//   };
+// }
