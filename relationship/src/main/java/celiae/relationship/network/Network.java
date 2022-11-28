@@ -15,15 +15,15 @@ public class Network {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstname;
-    private String lastname;
+    private String first_name;
+    private String last_name;
     private String gender;
-    private String education;
-    private Date birthday;
     private String email;
+    private Date birthday;
     private String phone;
+    private String address;
+    private String degree;
     private String qq;
     private String wechat;
-    private String address;
     private String relation;
 }

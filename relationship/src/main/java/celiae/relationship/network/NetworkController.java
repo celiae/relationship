@@ -44,10 +44,10 @@ public class NetworkController {
 
         return repository.findById(id)
                 .map(network -> {
-                    network.setFirstname(newNetwork.getFirstname());
-                    network.setLastname(newNetwork.getLastname());
+                    network.setFirst_name(newNetwork.getFirst_name());
+                    network.setLast_name(newNetwork.getLast_name());
                     network.setGender(newNetwork.getGender());
-                    network.setEducation(newNetwork.getEducation());
+                    network.setDegree(newNetwork.getDegree());
                     network.setBirthday(newNetwork.getBirthday());
                     network.setEmail(newNetwork.getEmail());
                     network.setPhone(newNetwork.getPhone());

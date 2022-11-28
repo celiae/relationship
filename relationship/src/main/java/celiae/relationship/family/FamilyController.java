@@ -44,10 +44,10 @@ public class FamilyController {
 
         return repository.findById(id)
                 .map(family -> {
-                    family.setFirstname(newFamily.getFirstname());
-                    family.setLastname(newFamily.getLastname());
+                    family.setFirst_name(newFamily.getFirst_name());
+                    family.setLast_name(newFamily.getLast_name());
                     family.setGender(newFamily.getGender());
-                    family.setEducation(newFamily.getEducation());
+                    family.setDegree(newFamily.getDegree());
                     family.setBirthday(newFamily.getBirthday());
                     family.setEmail(newFamily.getEmail());
                     family.setPhone(newFamily.getPhone());
