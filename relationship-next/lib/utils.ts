@@ -4,7 +4,7 @@ import useSWR from "swr";
 import Network from "types/network";
 import { INITIAL_NETWORK } from "./constant";
 
-export function UpdatePost(api: string, method: string, data: Network) {
+export function UpdatePost(method: string, data: Network) {
   if (method === "PUT") {
     fetch(`/api/network/${data.id}`, {
       method: "PUT",
@@ -14,7 +14,7 @@ export function UpdatePost(api: string, method: string, data: Network) {
       body: JSON.stringify(data),
     });
   } else if (method === "POST") {
-    fetch(api, {
+    fetch(`/api/network`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

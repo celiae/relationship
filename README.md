@@ -20,7 +20,7 @@ cd relationship
 
 - database 测试数据库
 - relationship 后端代码
-- f_relationship 前端代码
+- relationship-next 前端代码
 
 ### 加载数据库
 
@@ -66,16 +66,16 @@ cd relationship
 
 ### 启动前端 next.js
 
-在 `f_relationship` 下打开二个终端
+在 `relationship-next` 下打开二个终端
 
 #### 下载依赖
 
 ```bash
-npm install
+yarn
 ```
 
 #### 启动前端
 
 ```bash
-npm run dev
+yarn dev
 ```
