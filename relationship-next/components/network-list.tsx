@@ -15,7 +15,7 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import { Button } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { useRouter } from "next/router";
@@ -106,7 +106,6 @@ export default function NetworkList({ network }: Props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const router = useRouter();
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -133,42 +132,42 @@ export default function NetworkList({ network }: Props) {
             : rows
           ).map((row) => (
             <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
+              <TableCell>
                 {row.first_name}
                 {"  "}
                 {row.last_name}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.email}
+
+              <TableCell align="right">{row.phone}</TableCell>
+              <TableCell align="right">
+                {row.relation == null || row.relation == ""
+                  ? "人际关系"
+                  : row.relation}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.phone}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.relation}
-              </TableCell>
-              <TableCell style={{ width: 200 }} align="right">
-                <Button
-                  onClick={() => {
-                    router.push(`/network/${row.id}`);
-                  }}
-                >
-                  <BsInfoCircleFill />
-                </Button>
-                <Button
-                  onClick={() => {
-                    router.push(`/network/edit/${row.id}`);
-                  }}
-                >
-                  <AiFillEdit />
-                </Button>
-                <Button
-                  onClick={() => {
-                    router.push(`/network/delete/${row.id}`);
-                  }}
-                >
-                  <AiFillDelete />
-                </Button>
+              <TableCell align="right">
+                <ButtonGroup variant="contained">
+                  <Button
+                    onClick={() => {
+                      router.push(`/network/${row.id}`);
+                    }}
+                  >
+                    <BsInfoCircleFill />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      router.push(`/network/edit/${row.id}`);
+                    }}
+                  >
+                    <AiFillEdit />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      router.push(`/network/delete/${row.id}`);
+                    }}
+                  >
+                    <AiFillDelete />
+                  </Button>
+                </ButtonGroup>
               </TableCell>
             </TableRow>
           ))}

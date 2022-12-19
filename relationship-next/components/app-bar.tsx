@@ -17,9 +17,9 @@ import Slide from "@mui/material/Slide";
 import { useRouter } from "next/router";
 
 const pages = [
-  { name: "Home", href: "/" },
-  { name: "Network", href: "/network" },
-  { name: "Family", href: "/family" },
+  { name: "主页", href: "/" },
+  { name: "人际关系", href: "/network" },
+  { name: "亲戚", href: "/family" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 

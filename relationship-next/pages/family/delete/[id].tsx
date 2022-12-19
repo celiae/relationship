@@ -4,11 +4,11 @@ import { fetcher } from "lib/utils";
 import { useRouter } from "next/router";
 import { Button, Box, Typography, Divider } from "@mui/material";
 import { IoMdMale, IoMdFemale } from "react-icons/io";
-export default function DeleteNetwork() {
+export default function DeleteFamily() {
   const router = useRouter();
   const id = router.query.id as string;
   const { data, error } = useSWR<Family>(
-    id ? `/api/network/${id}` : null,
+    id ? `/api/family/${id}` : null,
     fetcher
   );
   if (error) return <div>Failed to load</div>;
@@ -43,17 +43,17 @@ export default function DeleteNetwork() {
         <Button
           color="warning"
           onClick={() => {
-            fetch(`/api/network/${data.id}`, {
+            fetch(`/api/family/${data.id}`, {
               method: "DELETE",
             });
-            router.push("/network");
+            router.push("/family");
           }}
         >
           确认删除
         </Button>
         <Button
           onClick={() => {
-            router.push("/network");
+            router.push("/family");
           }}
         >
           返回取消
